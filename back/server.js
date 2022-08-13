@@ -11,7 +11,7 @@ const dir = '../backups'
 const files = fs.readdirSync(dir)
 console.log(files);
 app.get('/',(req,res)=>{
-    let p= JSON.stringify({files});
+    let p= JSON.stringify(files);
 
     res.send(p)
 }
