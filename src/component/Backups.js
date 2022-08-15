@@ -5,13 +5,11 @@ const ListBackups = () => {
 
   const [data, setData] = useState([])
   useEffect(() => {
-    async function getData() {
-      const results = await axios.get('http://127.0.0.1:1234/');
-      console.log(results.data);
-      setData(results.data);
-    }
-    getData()
-  }, ['http://127.0.0.1:1234/'])
+      setInterval(()=>{axios.get('http://127.0.0.1:4000/')
+      .then(res =>setData(res.data))
+      .catch(err=>console.log(err))},1000);
+
+  }, [])
 
 
   return (
@@ -21,8 +19,9 @@ const ListBackups = () => {
       {data.map((item) => {
           return (
             <React.Fragment >
-              <div className='col backupBg'>
+              <div className='col backupBg' >
                 {item}
+                <button>Restore</button>
               </div>
             </React.Fragment>
           )
