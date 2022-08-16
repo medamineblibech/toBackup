@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --delay 1 server.js",
-    "watch":"nodemon --ext *,ejs --ignore back"
+    "watch":"nodemon --ext *,js,sql --ignore public"
   },
   "keywords": [],
   "author": "",
