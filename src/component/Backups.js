@@ -19,12 +19,12 @@ const ListBackups = () => {
   }, [])
 
 
-  /*const restore=()=>{
+  const restore=()=>{
      axios.get('http://127.0.0.1:4000/restore')
     .then(res => setData(res.data))
     .catch(err => console.log(err))
 
-  }*/
+  }
 
 
   return (
@@ -37,8 +37,7 @@ const ListBackups = () => {
             <div className='col backupBg' >
               <div>
                 {item}
-              
-                
+                <button className="buttonRestore" onClick={restore()}>restore</button>
               </div>
             </div>
           </React.Fragment>

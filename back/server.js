@@ -1,6 +1,7 @@
 const fs = require('fs')
 const express = require('express');
 const cors = require('cors')
+const cp = require('child_process').spawn
 const livereload = require('livereload');
 const connectLiveReload = require("connect-livereload");
 const path = require('path');
@@ -18,6 +19,29 @@ liveReloadServer.server.once('connection',()=>{
     },100)
 })
 
+/*app.get('/restore', (req, res) => {
+    cp.exec('restore.sh', (err, stdout, stderr) => {
+        if (err) {
+            return res.status(400).send({ message: err.message || "something wrong"})
+        }
+        res.status(200).send()
+    })
+})*/
+app.get('/restore', function(req, res) {
+    var command = spawn(__dirname + '/restore.sh', [ req.query.color || '' ]);
+    var output  = [];
+  
+    command.stdout.on('data', function(chunk) {
+      output.push(chunk);
+    }); 
+  
+    command.on('close', function(code) {
+      if (code === 0)
+        res.send(Buffer.concat(output));
+      else
+        res.send(500); //when the script fails, generate a Server Error HTTP response
+    });
+  });
 
 
 
@@ -40,14 +64,7 @@ setInterval(()=>{
 
 
 
-/*app.get('/restore', (req, res) => {
-    cp.exec('./restore.sh', (err, stdout, stderr) => {
-        if (err) {
-            return res.status(400).json({ output: null, error: err.message })
-        }
-        res.status(200).json({ output: stdout, error: null })
-    })
-})*/
+
 
 
 
