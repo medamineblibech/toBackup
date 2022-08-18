@@ -1,7 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
+//import PropTypes from 'prop-types'
+//import { Button } from 'react'
+//import { debug } from "webpack";
+var sys = require('sys')
+
+var exec = require('child_process').exec;
+const spawn = require('child_process').spawn
+var BACKUP_PATH='/home/houda/stage_i4tech/toBackup/backups'
+var USER='root'      
+var PASSWORD='houda' 
+//const mysqldump = spawn('mysql', [ '-u', process.env.DB_USER, `-p${process.env.DB_PASSWORD}`, process.env.DB_NAME ])
 
 
+
+function clickMe(db ,date)
+{ 
+ // function puts(error, stdout, stderr) { sys.puts(stdout) }
+
+ // exec(' mysql -u $USER -p$PASSWORD  $db  < $BACKUP_PATH/$db-$date.sql', puts);
+  
+}
 const ListBackups = () => {
 
 
@@ -18,6 +37,16 @@ const ListBackups = () => {
   fetchAPI()
   }, [])
 
+
+  const restore=()=>{
+    for (i=0;i<data.length;i++){
+      
+    }
+     axios.get('http://127.0.0.1:4000/restore')
+    .then(res => setData(res.data))
+    .catch(err => console.log(err))
+
+  }
 
   /*const restore=()=>{
      axios.get('http://127.0.0.1:4000/restore')
@@ -36,10 +65,18 @@ const ListBackups = () => {
           <React.Fragment >
             <div className='col backupBg' >
               <div>
-                {item}
-              
-                
+                {item}    
+    )
+               <div>
+                  <button onClick={clickMe}>
+                        restore
+                  </button>
+               </div>
+ 
+
+
               </div>
+             
             </div>
           </React.Fragment>
         )
