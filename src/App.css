@@ -63,9 +63,22 @@ body{
     background-repeat:no-repeat;
     border: 2px solid green;
     border-radius: 8px;
-    margin-left: 703px;
+    margin-left: 150px;
     cursor:pointer;
     overflow: hidden;
     outline:none;
+
+}
+
+.buttonDownload{
+  
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: 2px solid rgb(0, 4, 128);
+  border-radius: 8px;
+  margin-left: 160px;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
 
 }

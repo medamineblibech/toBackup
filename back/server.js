@@ -1,6 +1,7 @@
 const fs = require('fs')
 const express = require('express');
 const cors = require('cors')
+const mysql=require('mysql')
 const livereload = require('livereload');
 const connectLiveReload = require("connect-livereload");
 const path = require('path');
@@ -9,7 +10,6 @@ app.use(cors())
 app.use(express.json())
 app.use(connectLiveReload())
 const PORT = 4000
-const dir = '../public/backups'
 const liveReloadServer = livereload.createServer();
 liveReloadServer.watch(path.join(__dirname,'public'))
 liveReloadServer.server.once('connection',()=>{
@@ -22,11 +22,18 @@ liveReloadServer.server.once('connection',()=>{
 
 
 
-
-let files = fs.readdirSync(dir)
-
-
+const dir = '../public/backups'
+const files = fs.readdirSync(dir)
 console.log(files);
+
+let connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'Myp@ss123456789',
+    database : 'Gestion_client'
+  });
+  connection.connect();
+
 setInterval(()=>{
     app.get('/', (req, res) => {
 
@@ -40,14 +47,11 @@ setInterval(()=>{
 
 
 
-/*app.get('/restore', (req, res) => {
-    cp.exec('./restore.sh', (err, stdout, stderr) => {
-        if (err) {
-            return res.status(400).json({ output: null, error: err.message })
-        }
-        res.status(200).json({ output: stdout, error: null })
-    })
-})*/
+app.get('/download', (req, res) => {
+    files.forEach((i)=>
+    res.download(i)
+    )
+})
 
 
 

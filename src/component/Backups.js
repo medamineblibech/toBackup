@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
+import FileDownload from 'js-file-download'
 
 const ListBackups = () => {
 
@@ -19,12 +19,16 @@ const ListBackups = () => {
   }, [])
 
 
-  /*const restore=()=>{
-     axios.get('http://127.0.0.1:4000/restore')
-    .then(res => setData(res.data))
-    .catch(err => console.log(err))
-
-  }*/
+  const download=(e)=>{
+    axios({
+      url:'http://127.0.0.1:4000/download',
+      method:"GET",
+      responseType:"blob"
+    }).then((res)=>{
+      console.log(res);
+      FileDownload(res.data,"download.sql")
+    })
+  }
 
 
   return (
@@ -37,8 +41,8 @@ const ListBackups = () => {
             <div className='col backupBg' >
               <div>
                 {item}
-              
-                
+              <button className='buttonRestore' >restore</button>
+              <button className='buttonDownload' onClick={(e)=>download(e)} >download</button>
               </div>
             </div>
           </React.Fragment>
