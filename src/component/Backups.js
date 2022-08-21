@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import FileDownload from 'js-file-download'
+import FileDownload from './FileDownload';
 
 const ListBackups = () => {
 
@@ -8,41 +8,31 @@ const ListBackups = () => {
   /* Show Loading Screen While Fetching API Data In React*/
   /*const[loading,setLoading] = useState(false) */
 
-  const [data, setData] = useState([])
+  const [list, setList] = useState([])
   useEffect(() => {
   async function fetchAPI(){
     const res = await axios.get('http://127.0.0.1:4000/')
     console.log(res.data);
-    setData(res.data)
+    setList(res.data)
   }
   fetchAPI()
   }, [])
 
 
   
-  const download=(e)=>{
-    axios({
-      url:'http://127.0.0.1:4000/download',
-      method:"GET",
-      responseType:"blob"
-    }).then((res)=>{
-      console.log(res);
-      FileDownload(res.data,"download.sql")
-    })
-  }
 
   return (
     <div className='container App'>
       <br />
       <h1>list of backups mysql </h1>
-      {data.map((item) => {
+      {list.map((item) => {
         return (
           <React.Fragment >
-            <div className='col backupBg' >
+            <div className='col backupBg' key={list._id}>
               <div>
-                {item}
+                {item.files}
               <button className='buttonRestore' >restore</button>
-              <button className='buttonDownload' onClick={(e)=>download(e)} >download</button>
+              <FileDownload key={list._id}/>
               </div>
             </div>
           </React.Fragment>
