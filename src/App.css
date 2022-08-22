@@ -63,7 +63,7 @@ body{
     background-repeat:no-repeat;
     border: 2px solid green;
     border-radius: 8px;
-    margin-left: 150px;
+    margin-left: 21px;
     cursor:pointer;
     overflow: hidden;
     outline:none;
@@ -74,9 +74,9 @@ body{
   
   background-color: Transparent;
   background-repeat:no-repeat;
-  border: 2px solid rgb(0, 4, 128);
+  border: 2px solid rgb(152, 112, 70);
   border-radius: 8px;
-  margin-left: 160px;
+  margin-left: 31px;
   cursor:pointer;
   overflow: hidden;
   outline:none;

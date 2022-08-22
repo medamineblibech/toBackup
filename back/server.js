@@ -1,6 +1,7 @@
 const fs = require('fs')
 const express = require('express');
 const cors = require('cors')
+const spawn = require('child_process').spawn
 const mysql=require('mysql')
 const livereload = require('livereload');
 const connectLiveReload = require("connect-livereload");
@@ -24,7 +25,7 @@ liveReloadServer.server.once('connection',()=>{
 var data1 = {}
 data1.table = []
 var  id=1 
-const dir = '../public/backups'
+const dir = 'backups'
 const files = fs.readdirSync(dir)
 console.log(files);
 table =[]
@@ -79,10 +80,10 @@ app.get('/download/:_id',(req, res) =>{
            return res.status(404).send('file not found')
        }
        console.log(singleFile);
-       let f=JSON.stringify(singleFile.files)
-       console.log(f);
-       res.send(f)
-   
+      // let f=JSON.stringify(singleFile.files)
+      // console.log(f);
+ //      res.download(`backups/${f}`)
+   res.download(`backups/${singleFile.files}`)
    })
 
 
