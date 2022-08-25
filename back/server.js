@@ -45,7 +45,7 @@ for(var i = 0; i < files.length; i++) {
         myArray3= myArray2.split("-") 
         console.log( myArray3)
         var obj = { } 
-        obj._id=id++
+        obj.id=id++
         obj.files=myArray3[0]+'-'+myArray3[1]+'-'+myArray3[2]+'-'+myArray3[3]+'.sql'
         data1.table.push(obj)
     
@@ -75,11 +75,11 @@ setInterval(()=>{
 
 
 //nodejs api find data with id (pass id througn url)
-app.get('/download/:_id',(req, res) =>{
+app.get('/download/:id',(req, res) =>{
 
     //   console.log(req);
     //   console.log(req.params);               
-       const singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
+       const singleFile = data1.table.find((item) => item.id ===parseInt(req.params.id));
        if(!singleFile){
            return res.status(404).send('file not found')
        }
@@ -129,8 +129,8 @@ importer.import(a).then(()=>{
 
     }
      
- app.get('/restoredb/:_id',(res,req)=>{
-let singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
+ app.get('/restoredb/:id',(res,req)=>{
+let singleFile = data1.table.find((item) => item.id ===parseInt(req.params.id));
 let filename = `backups/${singleFile.files}`;
 let connection = config.get("db");
 res.send(`<script>${restore(filename,connection)}</script>`)

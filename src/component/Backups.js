@@ -32,8 +32,8 @@ const ListBackups = () => {
             <div className='col backupBg' >
               <div>
                 {item.files}
-                <Restoredb id={item._id} name={item.files} />
-                <FileDownload id={item._id} name={item.files} />
+                <Restoredb id={item.id} name={item.files} />
+                <FileDownload id={item.id} name={item.files} />
               </div>
             </div>
           </React.Fragment>

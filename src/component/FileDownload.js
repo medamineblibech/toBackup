@@ -30,7 +30,7 @@ function FileDownload({id,name}) {
     
   return (
     <div>
-    <button className='buttonDownload' onClick={(e)=>download(e)} >DOWNLOAD</button>
+    <button className='buttonDownload' onClick={(e)=>download(e)} key={id}>DOWNLOAD</button>
     </div>
   )
 }

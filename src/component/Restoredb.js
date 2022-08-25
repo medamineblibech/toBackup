@@ -16,7 +16,7 @@ const Restoredb = ({id}) => {
 
   return (
     <div>
-      <button className='buttonRestore' onClick={(e)=>restore(e)}>RESTORE</button>
+      <button className='buttonRestore' onClick={(e)=>restore(e)} key={id}>RESTORE</button>
     </div>
   )
 }
