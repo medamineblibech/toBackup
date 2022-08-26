@@ -1,8 +1,12 @@
 const fs = require('fs')
 const express = require('express');
 const cors = require('cors')
-const spawn = require('child_process').spawn
-const mysql=require('mysql')
+//const { exec } = require('node:child_process')
+//const spawn = require('child_process').spawn
+//const mysql=require('mysql')
+const config = require('config');
+const Importer = require('mysql-import');
+
 const livereload = require('livereload');
 const connectLiveReload = require("connect-livereload");
 const path = require('path');
@@ -49,13 +53,13 @@ for(var i = 0; i < files.length; i++) {
 }
 
 
-let connection = mysql.createConnection({
+/*let connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : 'Myp@ss123456789',
     database : 'Gestion_client'
   });
-  connection.connect();
+  connection.connect();*/
 
 setInterval(()=>{
     app.get('/', (req, res) => {
@@ -83,12 +87,54 @@ app.get('/download/:_id',(req, res) =>{
       // let f=JSON.stringify(singleFile.files)
       // console.log(f);
  //      res.download(`backups/${f}`)
-   res.download(`backups/${singleFile.files}`)
+   res.download(`backups/${singleFile.files}`)        
    })
+
+   /*exec(`mysql -uroot -h 127.0.0.1:3306 -pMyp@ss123456789 < ${singleFile.files}`,function(error, stdout, stderr) {
+        if (error) {
+            console.log(error);
+            res.sendStatus(500);
+        } else {
+            res.send(stdout);
+        }
+    })*/
+
+    /*exec("ls -la", (error, stdout, stderr) => {
+        if (error) {
+            console.log(`error: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.log(`stderr: ${stderr}`);
+            return;
+        }
+        console.log(`stdout: ${stdout}`);
+    });*/
+     
+ app.get('/restoredb/:_id',(res,req)=>{
+    let singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
+let filename = `backups/${singleFile.files}`;
+let connection = config.get("db");
+
+const importer = new Importer(connection);
+// New onProgress method, added in version 5.0!
+importer.onProgress(progress=>{
+  var percent = Math.floor(progress.bytes_processed / progress.total_bytes * 10000) / 100;
+  console.log(`${percent}% Completed`);
+});
+
+
+    importer.import(filename).then(()=>{
+        var files_imported = importer.getImported();
+        console.log(`${files_imported.length} SQL file(s) imported.`);
+      }).catch(err=>{
+        console.error(err);
+      })
+
+    });
 
 
 
 app.listen(PORT, () => {
     console.log(`runnig on ${PORT}`);
 })
-
