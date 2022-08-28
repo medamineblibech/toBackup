@@ -8,7 +8,7 @@ const App = () => {
   return (
     <div>
     <ErrorBundary style={{margin:"center"}}>
-      <ListBackups/>
+      <ListBackups />
     </ErrorBundary>
     </div>
   )
