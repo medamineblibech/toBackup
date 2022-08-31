@@ -18,13 +18,6 @@ const ListBackups = () => {
     }
     fetchAPI()
   }, [])
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> main
   return (
     <div className='container App'>
       <br />
