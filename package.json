@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "config": "^3.3.7",
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "js-file-download": "^0.4.12",
     "mysql": "^2.18.1",
+    "mysql-import": "^5.0.21",
     "nodemon": "^2.0.19",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
