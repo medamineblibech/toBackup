@@ -27,10 +27,6 @@ for db in $databases; do
   fi
 done
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 # Delete old backups
 if [ "$DAYS_TO_KEEP" == 30 ] ; then
   echo "Deleting backups older than $DAYS_TO_KEEP days"
@@ -38,7 +34,3 @@ if [ "$DAYS_TO_KEEP" == 30 ] ; then
 fi
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main

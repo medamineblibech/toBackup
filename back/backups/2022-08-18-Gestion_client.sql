@@ -101,7 +101,11 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'lait'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
+=======
+INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'ban'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
+>>>>>>> main
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +118,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+<<<<<<< HEAD
 -- Dump completed on 2022-08-18  0:00:02
+=======
+-- Dump completed on 2022-08-18  0:00:01
+>>>>>>> main

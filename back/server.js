@@ -110,9 +110,19 @@ app.get('/download/:_id',(req, res) =>{
         }
         console.log(`stdout: ${stdout}`);
     });*/
+<<<<<<< HEAD
 
 const restore=(a,b)=>{
 const importer = new Importer(b);
+=======
+     
+ app.get('/restoredb/:_id',(res,req)=>{
+    let singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
+let filename = `backups/${singleFile.files}`;
+let connection = config.get("db");
+
+const importer = new Importer(connection);
+>>>>>>> main
 // New onProgress method, added in version 5.0!
 importer.onProgress(progress=>{
   var percent = Math.floor(progress.bytes_processed / progress.total_bytes * 10000) / 100;
@@ -120,13 +130,18 @@ importer.onProgress(progress=>{
 });
 
 
+<<<<<<< HEAD
 importer.import(a).then(()=>{
+=======
+    importer.import(filename).then(()=>{
+>>>>>>> main
         var files_imported = importer.getImported();
         console.log(`${files_imported.length} SQL file(s) imported.`);
       }).catch(err=>{
         console.error(err);
       })
 
+<<<<<<< HEAD
     }
      
  app.get('/restoredb/:_id',(res,req)=>{
@@ -135,6 +150,8 @@ let filename = `backups/${singleFile.files}`;
 let connection = config.get("db");
 res.send(`<script>${restore(filename,connection)}</script>`)
 
+=======
+>>>>>>> main
     });
 
 

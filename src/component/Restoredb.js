@@ -21,4 +21,8 @@ const Restoredb = ({id}) => {
   )
 }
 
+<<<<<<< HEAD
 export default Restoredb
+=======
+export default Restoredb
+>>>>>>> main
