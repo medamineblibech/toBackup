@@ -101,7 +101,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'lait'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
+INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'ben'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

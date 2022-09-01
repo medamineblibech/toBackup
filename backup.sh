@@ -27,15 +27,10 @@ for db in $databases; do
   fi
 done
 
-
 # Delete old backups
 if [ "$DAYS_TO_KEEP" == 30 ] ; then
   echo "Deleting backups older than $DAYS_TO_KEEP days"
   find $BACKUP_PATH/* -mtime +$DAYS_TO_KEEP -exec rm {} \;
 fi
-
-
-
-
 
 
