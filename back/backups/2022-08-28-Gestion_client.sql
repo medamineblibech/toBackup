@@ -75,7 +75,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'\"benfollen\"','\"med\"','\"sfax\"','\"53345354\"','\"rte sidi mansour km 4.5\"'),(15,'\"benfollen\"','\"salah\"','sousse','\"35444443\"','\"kantoui\"'),(16,'\"benfollen\"','\"ali\"','\"gabes\"','\"54216789\"','\"........\"');
+INSERT INTO `client` VALUES (1,'\"benfollen\"','\"ali\"','\"sfax\"','\"53345354\"','\"rte sidi mansour km 4.5\"'),(15,'\"benfollen\"','\"salah\"','sousse','\"35444443\"','\"kantoui\"'),(16,'\"benfollen\"','\"ali\"','\"gabes\"','\"54216789\"','\"........\"');
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -101,7 +101,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'lait'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
+INSERT INTO `produit` VALUES ('\"001\"',13.2,24,'ban'),('\"002\"',5000,400,'formage'),('\"003\"',13.5,1,'chocolat');
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -114,4 +114,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-07-26  0:00:01
+-- Dump completed on 2022-08-28  0:00:01
