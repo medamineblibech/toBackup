@@ -51,16 +51,6 @@ for(var i = 0; i < files.length; i++) {
     
     } 
 }
-
-
-/*let connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'Myp@ss123456789',
-    database : 'Gestion_client'
-  });
-  connection.connect();*/
-
 setInterval(()=>{
     app.get('/', (req, res) => {
 
@@ -69,12 +59,6 @@ setInterval(()=>{
     }
     )
 },1000)
-
-/*app.use(express.static(join(__dirname, '../src')))*/
-
-
-
-//nodejs api find data with id (pass id througn url)
 app.get('/download/:_id',(req, res) =>{
 
     //   console.log(req);
@@ -89,34 +73,8 @@ app.get('/download/:_id',(req, res) =>{
  //      res.download(`backups/${f}`)
    res.download(`backups/${singleFile.files}`)        
    })
-
-   /*exec(`mysql -uroot -h 127.0.0.1:3306 -pMyp@ss123456789 < ${singleFile.files}`,function(error, stdout, stderr) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            res.send(stdout);
-        }
-    })*/
-
-    /*exec("ls -la", (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });*/
-     
- app.get('/restoredb/:_id',(res,req)=>{
-    let singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
-let filename = `backups/${singleFile.files}`;
-let connection = config.get("db");
-
-const importer = new Importer(connection);
+const restore=(a,b)=>{
+const importer = new Importer(b);
 // New onProgress method, added in version 5.0!
 importer.onProgress(progress=>{
   var percent = Math.floor(progress.bytes_processed / progress.total_bytes * 10000) / 100;
@@ -124,12 +82,20 @@ importer.onProgress(progress=>{
 });
 
 
-    importer.import(filename).then(()=>{
+importer.import(a).then(()=>{
         var files_imported = importer.getImported();
         console.log(`${files_imported.length} SQL file(s) imported.`);
       }).catch(err=>{
         console.error(err);
       })
+
+    }
+     
+ app.get('/restoredb/:id',(req,res)=>{
+let singleFile = data1.table.find((item) => item._id ===parseInt(req.params.id));
+let filename = `backups/${singleFile.files}`;
+let connection = config.get("db");
+res.send(`<script>${restore(filename,connection)}</script>`)
 
     });
 
