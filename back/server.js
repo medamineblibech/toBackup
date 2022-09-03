@@ -45,22 +45,12 @@ for(var i = 0; i < files.length; i++) {
         myArray3= myArray2.split("-") 
         console.log( myArray3)
         var obj = { } 
-        obj.id=id++
+        obj._id=id++
         obj.files=myArray3[0]+'-'+myArray3[1]+'-'+myArray3[2]+'-'+myArray3[3]+'.sql'
         data1.table.push(obj)
     
     } 
 }
-
-
-/*let connection = mysql.createConnection({
-    host     : 'localhost',
-    user     : 'root',
-    password : 'Myp@ss123456789',
-    database : 'Gestion_client'
-  });
-  connection.connect();*/
-
 setInterval(()=>{
     app.get('/', (req, res) => {
 
@@ -69,17 +59,11 @@ setInterval(()=>{
     }
     )
 },1000)
-
-/*app.use(express.static(join(__dirname, '../src')))*/
-
-
-
-//nodejs api find data with id (pass id througn url)
-app.get('/download/:id',(req, res) =>{
+app.get('/download/:_id',(req, res) =>{
 
     //   console.log(req);
     //   console.log(req.params);               
-       const singleFile = data1.table.find((item) => item.id ===parseInt(req.params.id));
+       const singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
        if(!singleFile){
            return res.status(404).send('file not found')
        }
@@ -89,28 +73,6 @@ app.get('/download/:id',(req, res) =>{
  //      res.download(`backups/${f}`)
    res.download(`backups/${singleFile.files}`)        
    })
-
-   /*exec(`mysql -uroot -h 127.0.0.1:3306 -pMyp@ss123456789 < ${singleFile.files}`,function(error, stdout, stderr) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            res.send(stdout);
-        }
-    })*/
-
-    /*exec("ls -la", (error, stdout, stderr) => {
-        if (error) {
-            console.log(`error: ${error.message}`);
-            return;
-        }
-        if (stderr) {
-            console.log(`stderr: ${stderr}`);
-            return;
-        }
-        console.log(`stdout: ${stdout}`);
-    });*/
-
 const restore=(a,b)=>{
 const importer = new Importer(b);
 // New onProgress method, added in version 5.0!
@@ -129,8 +91,8 @@ importer.import(a).then(()=>{
 
     }
      
- app.get('/restoredb/:id',(res,req)=>{
-let singleFile = data1.table.find((item) => item.id ===parseInt(req.params.id));
+ app.get('/restoredb/:_id',(req,res)=>{
+let singleFile = data1.table.find((item) => item._id ===parseInt(req.params._id));
 let filename = `backups/${singleFile.files}`;
 let connection = config.get("db");
 res.send(`<script>${restore(filename,connection)}</script>`)
